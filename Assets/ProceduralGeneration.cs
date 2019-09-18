@@ -6,8 +6,9 @@ public class ProceduralGeneration : MonoBehaviour
 {
     //[SerializeField] private GameObject platform;
     [SerializeField] private GameObject [] anchorpoints;
-    [SerializeField] private GameObject ch;
+    private GameObject ch;
     [SerializeField] private float speed;
+    [SerializeField] private GameObject _parent;
 
     private GameObject _newAnchorPoint;
     
@@ -27,7 +28,8 @@ public class ProceduralGeneration : MonoBehaviour
                     ch = child.gameObject;
                     _test = new Vector3(0, 0, ch.transform.position.z);
                     _newAnchorPoint = Instantiate<GameObject>(anchorpoints[k], _test, transform.rotation);
-                    _newAnchorPoint.GetComponents<MovementManager>()[0].SetSpeed(speed);
+                    _newAnchorPoint.GetComponents<MovementManager>()[0].SetSpeed(GetSpeed());
+                    _newAnchorPoint.transform.SetParent(_parent.transform);
                     k = Random.Range(0, anchorpoints.Length);
                 }
             }
@@ -36,5 +38,23 @@ public class ProceduralGeneration : MonoBehaviour
 
 
         }
+    }
+
+    private void Update()
+    {
+        foreach(Transform kid in _parent.transform)
+        {
+            kid.gameObject.GetComponent<MovementManager>().SetSpeed(GetSpeed());
+        }
+    }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public float GetSpeed()
+    {
+        return this.speed;
     }
 }

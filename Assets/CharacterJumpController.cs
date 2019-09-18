@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterJumpController : MonoBehaviour
 {
     Rigidbody rb;
+    [Range(1,5)][SerializeField] private float _movementSpeed = 1;
 
     private void Start()
     {
@@ -18,11 +19,20 @@ public class CharacterJumpController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey("left"))
         {
-            gameObject.transform.localPosition += Vector3.left * Time.deltaTime;
+            gameObject.transform.localPosition += Vector3.left * Time.deltaTime * _movementSpeed;
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey("right"))
         {
-            gameObject.transform.localPosition += Vector3.right * Time.deltaTime;
+            gameObject.transform.localPosition += Vector3.right * Time.deltaTime * _movementSpeed;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collectable"))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("collected!!!!");
         }
     }
 }

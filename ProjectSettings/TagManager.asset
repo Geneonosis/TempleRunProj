@@ -7,6 +7,8 @@ TagManager:
   - female
   - Female
   - Ball
+  - Fire
+  - Collectable
   layers:
   - Default
   - TransparentFX

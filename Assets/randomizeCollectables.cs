@@ -20,9 +20,12 @@ public class randomizeCollectables : MonoBehaviour
     {
         if (Time.time % 5 == 0)
         {
-            GameObject newCollectable = Instantiate<GameObject>(collectable, spawnpoint.position, new Quaternion(0, 0, 0, 0));
-            newCollectable.GetComponent<MovementManager>().SetSpeed(3);
+            GameObject newCollectable = Instantiate<GameObject>(collectable, spawnpoint.position, new Quaternion(45, 45, 45, 0));
+            //newCollectable.GetComponent<MovementManager>().SetSpeed(3);
             newCollectable.transform.SetParent(parent.transform);
+            //parent.GetComponent<MovementManager>().SetSpeed(4);
+            int i = Random.Range(0, _collectables.Length);
+            collectable = _collectables[i];
         }
     }
 }

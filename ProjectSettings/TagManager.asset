@@ -9,6 +9,7 @@ TagManager:
   - Ball
   - Fire
   - Collectable
+  - platform
   layers:
   - Default
   - TransparentFX

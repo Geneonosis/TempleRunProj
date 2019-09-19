@@ -6,8 +6,6 @@ public class SpeedUpCollectible : MonoBehaviour
 {
     private void OnDestroy()
     {
-        EnumsForCollectables.TryThis();
+        Camera.main.gameObject.GetComponent<ProceduralGeneration>().SetSpeed(100);
     }
-
-
 }

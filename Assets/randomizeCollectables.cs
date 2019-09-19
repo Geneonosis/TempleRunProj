@@ -6,6 +6,7 @@ public class randomizeCollectables : MonoBehaviour
 {
     [SerializeField] private GameObject [] _collectables;
     [SerializeField] private Transform spawnpoint;
+    [SerializeField] private GameObject parent;
     private GameObject collectable;
 
     private void Start()
@@ -21,6 +22,7 @@ public class randomizeCollectables : MonoBehaviour
         {
             GameObject newCollectable = Instantiate<GameObject>(collectable, spawnpoint.position, new Quaternion(0, 0, 0, 0));
             newCollectable.GetComponent<MovementManager>().SetSpeed(3);
+            newCollectable.transform.SetParent(parent.transform);
         }
     }
 }

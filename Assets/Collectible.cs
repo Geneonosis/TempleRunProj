@@ -7,22 +7,26 @@ public class Collectible : MonoBehaviour
     [SerializeField] bool speedUpCollectible = false;
     [SerializeField] bool slowDownCollectible = false;
     [SerializeField] bool otherCollectible = false;
+    public bool touchedPlayer;
     private void OnDestroy()
     {
         //Camera.main.gameObject.GetComponent<ProceduralGeneration>().SetSpeed(100);
-        if (speedUpCollectible)
+        if (speedUpCollectible && touchedPlayer)
         {
             transform.parent.transform.parent.GetComponent<MovementManager>().SetSpeedUpFlag(true);
+            touchedPlayer = false;
         }
 
-        if (slowDownCollectible)
+        if (slowDownCollectible && touchedPlayer)
         {
             transform.parent.transform.parent.GetComponent<MovementManager>().SetSlowDownFlag(true);
+            touchedPlayer = false;
         }
 
-        if (otherCollectible)
+        if (otherCollectible && touchedPlayer)
         {
             transform.parent.transform.parent.GetComponent<MovementManager>().SetOtherCollected(true);
+            touchedPlayer = false;
         }
     }
 }

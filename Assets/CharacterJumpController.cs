@@ -31,6 +31,7 @@ public class CharacterJumpController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Collectable"))
         {
+            other.gameObject.GetComponent<Collectible>().touchedPlayer = true;
             Destroy(other.gameObject);
             Debug.Log("collected!!!!");
         }

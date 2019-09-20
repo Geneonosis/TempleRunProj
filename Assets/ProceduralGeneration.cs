@@ -9,17 +9,17 @@ public class ProceduralGeneration : MonoBehaviour
     private GameObject ch;
     [SerializeField] private float speed;
     [SerializeField] public GameObject _parent;
+    [SerializeField] private int startingBlockNumber;
 
     private GameObject _newAnchorPoint;
     
     private Vector3 _test = new Vector3(0, 0, -4);
-    [Tooltip("the constant space between blocks")][SerializeField] float distanceApart = 2;
-    // Start is called before the first frame update
+
     void Start()
     {
         int k = Random.Range(0, anchorpoints.Length);
         _newAnchorPoint = anchorpoints[k];
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < startingBlockNumber; i++)
         {
             foreach (Transform child in _newAnchorPoint.transform)
             {
@@ -28,25 +28,11 @@ public class ProceduralGeneration : MonoBehaviour
                     ch = child.gameObject;
                     _test = new Vector3(0, 0, ch.transform.position.z);
                     _newAnchorPoint = Instantiate<GameObject>(anchorpoints[k], _test, transform.rotation);
-                    //_newAnchorPoint.GetComponents<MovementManager>()[0].SetSpeed(GetSpeed());
                     _newAnchorPoint.transform.SetParent(_parent.transform);
                     k = Random.Range(0, anchorpoints.Length);
                 }
             }
-            //float width = ch.transform.localScale.z;
-
-
-
         }
-    }
-
-    private void Update()
-    {
-        /*foreach(Transform kid in _parent.transform)
-        {
-            kid.gameObject.GetComponent<MovementManager>().SetSpeed(GetSpeed());
-        }*/
-        //_parent.gameObject.GetComponent<MovementManager>().SetSpeed(GetSpeed());
     }
 
     public void SetSpeed(float speed)

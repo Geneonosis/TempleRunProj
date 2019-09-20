@@ -133,11 +133,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6694945652079977631}
     m_Modifications:
-    - target: {fileID: 4133508564361912148, guid: 16087d878a5ee794db607cc071a8f76a,
-        type: 3}
-      propertyPath: m_Name
-      value: Cube
-      objectReference: {fileID: 0}
     - target: {fileID: 3878344793458542564, guid: 16087d878a5ee794db607cc071a8f76a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,6 +192,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133508564361912148, guid: 16087d878a5ee794db607cc071a8f76a,
+        type: 3}
+      propertyPath: m_Name
+      value: Cube
       objectReference: {fileID: 0}
     - target: {fileID: 3097367282664797816, guid: 16087d878a5ee794db607cc071a8f76a,
         type: 3}

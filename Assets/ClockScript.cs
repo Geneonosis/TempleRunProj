@@ -27,7 +27,8 @@ public class ClockScript : MonoBehaviour
 
         _seconds = _timeLimit - (Time.time % _timeLimit);
 
-        _clockTMProComponent.SetText(_seconds.ToString("0:00.<size=21>0000</size>"));
+        _clockTMProComponent.SetText(_seconds.ToString("0:00.<size=45>00</size>"));
+        //_clockTMProComponent.SetSecondClockText(Time.time);
         
     }
 }

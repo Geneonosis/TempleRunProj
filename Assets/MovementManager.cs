@@ -9,10 +9,25 @@ public class MovementManager : MonoBehaviour
     public bool speedUpCollected = false;
     public bool slowDownCollected = false;
     public bool otherCollected = false;
+    public bool speedUpUnlock = false;
+    public float speedup = ORIGINAL_SPEED;
     void FixedUpdate()
     {
         transform.localPosition += new Vector3(0, 0, -(platformSpeed * Time.deltaTime));
         PowerUpModifiers();
+
+        if (speedUpUnlock)
+        {
+            Debug.Log("collected!");
+            speedup += 0.1f;
+            SetSpeed(speedup);
+
+        }
+        else
+        {
+            speedup = ORIGINAL_SPEED;
+            SetSpeed(ORIGINAL_SPEED);
+        }
     }
 
 
@@ -50,8 +65,10 @@ public class MovementManager : MonoBehaviour
 
     private IEnumerator SpeedUpForSetTime()
     {
-        SetSpeed(10);
-        yield return new WaitForSeconds(3f);
+        //SetSpeed(10);
+        speedUpUnlock = true;
+        yield return new WaitForSeconds(5f);
+        speedUpUnlock = false;
         this.platformSpeed = ORIGINAL_SPEED;
     }
     private IEnumerator SlowDownForSetTime()

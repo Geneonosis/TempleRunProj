@@ -30,16 +30,16 @@ public class DestroyTrack : MonoBehaviour
         //choose a random block object
         Transform pos = lastFemale.transform.GetChild(1).transform;
 
-        if (clock.levelNumber == 2)
+        if (clock.levelNumber == 1)
         {
             arrayEnding = 1;
-        }if (clock.levelNumber == 3)
+        }if (clock.levelNumber == 2)
         {
             arrayEnding = 2;
-        }if (clock.levelNumber == 4)
+        }if (clock.levelNumber == 3)
         {
             arrayEnding = 3;
-        }if (clock.levelNumber >= 5)
+        }if (clock.levelNumber >= 4)
         {
             arrayEnding = startArray.Length;
         }

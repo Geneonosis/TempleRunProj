@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
-    private float platformSpeed = 3;
-    private const float ORIGINAL_SPEED = 3;
+    private float platformSpeed = 4;
+    private const float ORIGINAL_SPEED = 4;
     public bool speedUpCollected = false;
     public bool slowDownCollected = false;
     public bool otherCollected = false;
     public bool speedUpUnlock = false;
     public float speedup = ORIGINAL_SPEED;
+    public Transform enemies;
+    public GameObject Player;
     void FixedUpdate()
     {
         transform.localPosition += new Vector3(0, 0, -(platformSpeed * Time.deltaTime));
@@ -22,11 +24,6 @@ public class MovementManager : MonoBehaviour
             speedup += 0.1f;
             SetSpeed(speedup);
 
-        }
-        else
-        {
-            speedup = ORIGINAL_SPEED;
-            SetSpeed(ORIGINAL_SPEED);
         }
     }
 
@@ -59,7 +56,8 @@ public class MovementManager : MonoBehaviour
 
             //set the flag back to false
             otherCollected = false;
-            this.platformSpeed = ORIGINAL_SPEED;
+            StartCoroutine(Invincible());
+            //this.platformSpeed = ORIGINAL_SPEED;
         }
     }
 
@@ -69,13 +67,29 @@ public class MovementManager : MonoBehaviour
         speedUpUnlock = true;
         yield return new WaitForSeconds(5f);
         speedUpUnlock = false;
+        speedup = ORIGINAL_SPEED;
         this.platformSpeed = ORIGINAL_SPEED;
     }
     private IEnumerator SlowDownForSetTime()
     {
-        SetSpeed(1f);
+        Debug.Log("ssslllooowwwdddooowwnnn");
+        SetSpeed(0.2f);
         yield return new WaitForSeconds(3f);
         this.platformSpeed = ORIGINAL_SPEED;
+    }
+    private IEnumerator Invincible()
+    {
+
+        Player.GetComponent<MeshRenderer>().materials[0].color = Color.blue;
+        Player.GetComponent<BoxCollider>().enabled = false;
+        Player.GetComponent<Rigidbody>().useGravity = false;
+
+        yield return new WaitForSeconds(3f);
+
+        Player.GetComponent<MeshRenderer>().materials[0].color = Color.white;
+        Player.GetComponent<Rigidbody>().useGravity = true;
+        Player.GetComponent<BoxCollider>().enabled = true;
+
     }
 
     public void SetSpeed(float speed)

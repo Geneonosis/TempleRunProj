@@ -24,11 +24,6 @@ public class CharacterJumpController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log("touching the floor");
-    }
-
     private void OnCollisionStay(Collision collision)
     {
         //Debug.Log("touching the floor :: Collision");

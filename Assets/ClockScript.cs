@@ -51,6 +51,7 @@ public class ClockScript : MonoBehaviour
         {
             key = false;
         }
+
         //_clockTMProComponent.SetSecondClockText(Time.time);
     }
 

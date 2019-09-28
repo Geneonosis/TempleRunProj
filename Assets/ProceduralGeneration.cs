@@ -17,8 +17,8 @@ public class ProceduralGeneration : MonoBehaviour
 
     void Start()
     {
-        int k = Random.Range(0, anchorpoints.Length);
-        _newAnchorPoint = anchorpoints[k];
+        //int k = Random.Range(0, anchorpoints.Length);
+        _newAnchorPoint = anchorpoints[0];
         for(int i = 0; i < startingBlockNumber; i++)
         {
             foreach (Transform child in _newAnchorPoint.transform)
@@ -27,9 +27,9 @@ public class ProceduralGeneration : MonoBehaviour
                 {
                     ch = child.gameObject;
                     _test = new Vector3(0, 0, ch.transform.position.z);
-                    _newAnchorPoint = Instantiate<GameObject>(anchorpoints[k], _test, transform.rotation);
+                    _newAnchorPoint = Instantiate<GameObject>(anchorpoints[0], _test, transform.rotation);
                     _newAnchorPoint.transform.SetParent(_parent.transform);
-                    k = Random.Range(0, anchorpoints.Length);
+                    //k = Random.Range(0, anchorpoints.Length);
                 }
             }
         }

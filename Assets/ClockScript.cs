@@ -8,6 +8,8 @@ public class ClockScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _clockTMProSeconds;
     [SerializeField] private TextMeshProUGUI _clockTMProMilliSeconds;
+    [SerializeField] private GameObject _messagePanel;
+    [SerializeField] private GameObject _messagePanelText;
     private int _minutes;
     private int _seconds;
     private float _tenthASecond;
@@ -31,22 +33,33 @@ public class ClockScript : MonoBehaviour
     {
 
         _seconds = (int)(_timeLimit - (Time.timeSinceLevelLoad % _timeLimit));
-
+        _tenthASecond = ((_timeLimit - (Time.timeSinceLevelLoad % _timeLimit)) * 100) % 99;
         _clockTMProSeconds.SetText(_seconds.ToString("00"));
         _clockTMProMilliSeconds.SetText(_tenthASecond.ToString("00"));
-        
-        if((int)_seconds == 0 && key == false)
+
+        if ((int)_seconds == 0 && key == false)
         {
             key = true;
             levelNumber++;
             levelText.SetText(levelNumber.ToString("Level: 00"));
-            //show some sort of indication
+            //TODO: show some sort of invasive indication
+            StartCoroutine(messageForUser());
+
         }
 
-        if((int)_seconds == 1)
+        if ((int)_seconds == 1)
         {
             key = false;
         }
         //_clockTMProComponent.SetSecondClockText(Time.time);
+    }
+
+
+    public IEnumerator messageForUser() {
+        _messagePanelText.GetComponent<TextMeshProUGUI>().SetText(levelNumber.ToString("Level: 00"));
+        _messagePanel.SetActive(true);
+        yield return new WaitForSeconds(3);
+        _messagePanel.SetActive(false);
+        //_messagePanel.GetComponent<Animation>().Play();
     }
 }

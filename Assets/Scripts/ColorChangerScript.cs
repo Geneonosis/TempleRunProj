@@ -6,6 +6,7 @@ public class ColorChangerScript : MonoBehaviour
 {
     [SerializeField] private Color color;
     private bool _changeTheColor = false;
+    [SerializeField] private float timeInSeconds;
 
     // Update is called once per frame
     void Update()
@@ -13,7 +14,7 @@ public class ColorChangerScript : MonoBehaviour
         //if the remainder of the time across 3 seconds is 0 and the color changing flag is false then set the color changing flag to true
         //select a new color at random, and then assign that new color to the gameObject's Material
 
-        if((int)(Time.time % 3) == 0 && _changeTheColor == false)
+        if((int)(Time.time % timeInSeconds) == 0 && _changeTheColor == false)
         {
             _changeTheColor = true;
             if (_changeTheColor)
@@ -25,7 +26,7 @@ public class ColorChangerScript : MonoBehaviour
 
         //if the remainder of the time across 3 seconds is 1 and the color changing flag is true then reset the color changing flag to false
 
-        if((int)(Time.time % 3) == 1 && _changeTheColor == true)
+        if((int)(Time.time % timeInSeconds) == 1 && _changeTheColor == true)
         {
             _changeTheColor = false;
         }

@@ -7,6 +7,8 @@ public class DestroyTrack : MonoBehaviour
     private GameObject parent;
     private GameObject lastFemale;
     private GameObject [] startArray;
+    [SerializeField] private ClockScript clock;
+    int arrayEnding = 0;
 
     private void Start()
     {
@@ -23,11 +25,29 @@ public class DestroyTrack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
         Debug.Log("hi");
         //choose a random block object
         Transform pos = lastFemale.transform.GetChild(1).transform;
-        GameObject _newPlatform = Instantiate<GameObject>(startArray[Random.Range(0, startArray.Length)], pos.position, transform.rotation);
+
+        if (clock.levelNumber == 2)
+        {
+            arrayEnding = 1;
+        }if (clock.levelNumber == 3)
+        {
+            arrayEnding = 2;
+        }if (clock.levelNumber == 4)
+        {
+            arrayEnding = 3;
+        }if (clock.levelNumber >= 5)
+        {
+            arrayEnding = startArray.Length;
+        }
+        int randomNumber = Random.Range(0, arrayEnding);
+        GameObject _newPlatform = Instantiate<GameObject>(startArray[randomNumber], pos.position, transform.rotation);
         _newPlatform.transform.SetParent(parent.transform);
+        //_newPlatform = Instantiate<GameObject>(startArray[randomNumber], pos.position, transform.rotation);
+        //_newPlatform.transform.SetParent(parent.transform);
         lastFemale = _newPlatform;
         Destroy(other.gameObject);
     }

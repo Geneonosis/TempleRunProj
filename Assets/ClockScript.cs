@@ -17,7 +17,7 @@ public class ClockScript : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] private TextMeshProUGUI levelText;
-    private int levelNumber = 1;
+    public int levelNumber = 1;
     private bool key = false;
     void Start()
     {
@@ -55,7 +55,8 @@ public class ClockScript : MonoBehaviour
     }
 
 
-    public IEnumerator messageForUser() {
+    public IEnumerator messageForUser()
+    {
         _messagePanelText.GetComponent<TextMeshProUGUI>().SetText(levelNumber.ToString("Level: 00"));
         _messagePanel.SetActive(true);
         yield return new WaitForSeconds(3);

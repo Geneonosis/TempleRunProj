@@ -11,12 +11,9 @@ public class CharacterJumpController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
     }
+
     public void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            rb.AddForce(Vector3.up*300);
-        }
         if (Input.GetKey(KeyCode.A) || Input.GetKey("left"))
         {
             gameObject.transform.localPosition += Vector3.left * Time.deltaTime * _movementSpeed;
@@ -27,13 +24,27 @@ public class CharacterJumpController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("touching the floor");
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //Debug.Log("touching the floor :: Collision");
+        if (Input.GetKeyDown("space"))
+        {
+            rb.AddForce(Vector3.up * 300);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Collectable"))
         {
             other.gameObject.GetComponent<Collectible>().touchedPlayer = true;
             Destroy(other.gameObject);
-            Debug.Log("collected!!!!");
+            //Debug.Log("collected!!!!");
         }
     }
 }
